@@ -4,7 +4,7 @@ function doFacebookLogin() {
         // handle the response
         statusChangeCallback(response);
     },
-    {scope: 'public_profile,email'}
+    {scope: 'public_profile,user_friends,email'}
     );
 }
 
