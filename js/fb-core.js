@@ -26,6 +26,9 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     testAPI();
+
+    // after login, redirect to game
+    redirectToGame();
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
     console.log('Please log into this app.');
@@ -49,7 +52,7 @@ function checkLoginState() {
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : '442737835929786',
+    appId      : '553083218204654',
     xfbml      : true,
     version    : 'v2.5'
   });
@@ -85,4 +88,9 @@ function testAPI() {
     var access_token = FB.getAuthResponse()['accessToken'];
     console.log('Access Token = '+ access_token);
   });
+}
+
+function redirectToGame() {
+  url = "webgl/index.html";
+  $(location).attr("href", url);
 }
