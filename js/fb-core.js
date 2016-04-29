@@ -2,17 +2,30 @@
 function doFacebookLogin() {
   FB.login(function(response) {
         // handle the response
-        statusChangeCallback(response);
+        loginCallback(response);
     },
     {scope: 'public_profile,user_friends,email'}
     );
 }
 
-function doFacebookLogout() {
-  FB.logout(function(response) {
-    // user is now logged out
-    statusChangeCallback(response);
-  });
+// This is called with the results from from FB.getLoginStatus().
+function loginCallback(response) {
+  console.log('statusChangeCallback');
+  console.log(response);
+  // The response object is returned with a status field that lets the
+  // app know the current login status of the person.
+  // Full docs on the response object can be found in the documentation
+  // for FB.getLoginStatus().
+  if (response.status === 'connected') {
+    // Logged into your app and Facebook.
+    testAPI();
+
+    // after login, redirect to game
+    redirectToGame();
+  } else {
+    // Show messages to let user re-login to facebook.
+    // For example, the game need your login for playing.
+  }
 }
 
 // This is called with the results from from FB.getLoginStatus().
@@ -59,14 +72,6 @@ window.fbAsyncInit = function() {
 
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
-
-    //FB.Canvas.setDoneLoading();
-    FB.Canvas.setDoneLoading(
-      function (result) {
-        console.log("loading time=" + result.time_delta_ms);
-      }
-    );
-    console.log("called FB.Canvas.setDoneLoading()");
   });
 };
 
