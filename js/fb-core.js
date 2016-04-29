@@ -31,12 +31,12 @@ function statusChangeCallback(response) {
     redirectToGame();
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
-    console.log('Please log into this app.');
+    console.log('Please log into this app[not_authorized].');
     doFacebookLogin();
   } else {
     // The person is not logged into Facebook, so we're not sure if
     // they are logged into this app or not.
-    console.log('Please log into this app.');
+    console.log('Please log into this app.[' + response.status + ']');
     doFacebookLogin();
   }
 }
